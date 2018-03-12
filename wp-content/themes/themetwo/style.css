@@ -196,3 +196,10 @@ textarea:focus{
 .portfolio-image:nth-child(2n){
   float:right;
 }
+.sidebar h2 a {
+  font-size: 17px;
+  color: #dbdada;
+  border-bottom: 1px solid #dbdada;
+  padding: 0 0 5px 0;
+  margin-bottom: 20px;
+}
