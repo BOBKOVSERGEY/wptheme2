@@ -165,14 +165,48 @@ add_theme_support('post-thumbnails');
  * шорткод галереии
  */
 
+function themeTwoGallery($attr, $text='')
+{
+  // получаем массив id картинок
+  $imgSrc = explode(',', $attr['ids']);
+
+  // шаблон удаления атрибутов
+  $pattern = '#(width|height)="\d+"#';
+
+
+  $return = '<ul id="slide_2" class="slidik">';
+
+  $i = 1;
+
+  foreach ($imgSrc as $item) {
+    // получаем html код к картинке
+    $imgUrl = wp_get_attachment_image( $item, 'full');
+
+    // вырезаем атрибуты ширины и высоты
+    $imgUrl = preg_replace($pattern, '', $imgUrl);
+
+    // формируем вывод картинок
+
+    if ($i == 1) {
+      $return .= '<li class="show">' . $imgUrl . '</li>';
+    } else {
+      $return .= '<li>' . $imgUrl . '</li>';
+    }
+    $i++;
+  }
+  $return .= '<a data-slidik="slide_2" class="next" href="#">Next</a>
+            <a data-slidik="slide_2" class="prev" href="#">Prev</a>
+            <div class="captionWrap"><div data-slidik="slide_2" class="caption"></div></div>
+            <div class="portfolio-close"><a href="#"></a></div>
+            </ul>';
+  echo $return;
+}
+
+add_shortcode('shortcode_gallery', 'themeTwoGallery');
+
 /**
  * end шорткод галереии
  */
-function themeTwoGallery($attr, $text='')
-{
-  echo 'hello';
-}
-add_shortcode('shortcode_gallery', 'themeTwoGallery');
 /**
  * постраничная навигация
  */
